@@ -38,11 +38,12 @@ while game_running == True:
                 if player['health'] <= 0:
                     monster_won = True
 
-            print(monster['health'])
-            print(player['health'])
-
         elif player_choice == '2':
-            print(player['health'] + player['heal'])
+            player['health'] = player['health'] + player['heal']
+
+            player['health'] = player['health'] - monster['attack']
+            if player['health'] <= 0:
+                monster_won = True
 
         elif player_choice == '3':
             print('---' * 7)
@@ -53,5 +54,16 @@ while game_running == True:
         else:
             print('Invalid Input')
 
-        if player_won == True or monster_won == True:
+        if player_won == False and monster_won == False:
+            print('---' * 7)
+            print(player['name'] + ' has ' + str(player['health']) + ' left')
+            print('---' * 7)
+            print(monster['name'] + ' has ' + str(monster['health']) + ' left')
+            print('---' * 7)
+
+        elif player_won:
+            print(player['name'] + ' won')
+            new_round = False
+        elif monster_won:
+            print('The monster won')
             new_round = False
